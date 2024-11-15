@@ -12,7 +12,7 @@ connectDB()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 const corsOptions ={
-    origin: 'http://localhost:5173', 
+    origin:process.env.FRONTEND_PORT , 
     methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
     
