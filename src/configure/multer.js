@@ -1,11 +1,15 @@
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        console.log(file);
+        const dir = './public';
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
 
-        cb(null, './public');
+        cb(null, dir);
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
@@ -13,5 +17,6 @@ const storage = multer.diskStorage({
         cb(null, filename);
     }
 });
+
 const upload = multer({ storage });
-export default upload
+export default upload;
